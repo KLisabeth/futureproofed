@@ -5,8 +5,8 @@
 				<router-link to="/" aria-label="logo" class="logo">
 					<img src="../assets/logo.png" alt="Logo" />
 				</router-link>
-				<i class="fa fa-list"></i>
-				<span class="data">{{ this.$route.name }}</span>
+				<i :class="'fa ' + this.$route.meta.icon"></i>
+				<span class="data">{{ this.$route.meta.title }}</span>
 			</div>
 			<div>
 				<form class="search-wrap" action="">

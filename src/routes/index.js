@@ -15,31 +15,39 @@ const routes = [
 	{
 		path: '/',
 		component: Home,
-		name: 'Emission',
-		icon: 'fa fa-home fa-2x',
-		props: true,
+		name: 'home',
+		meta: {
+			icon: 'fa-home',
+			title: 'Dashboard',
+		},
 	},
 	{
 		path: '/data',
 		component: Data,
-		name: 'Emission Data',
-		icon: 'fa fa-list fa-2x',
-		props: true,
+		name: 'data',
+		meta: {
+			icon: 'fa-list',
+			title: 'Emission Data',
+		},
 	},
 	{
 		path: '/analysis',
 		component: Analysis,
-		name: 'Emission Analysis',
-		icon: 'fa fa-line-chart fa-2x',
-		props: true,
+		name: 'analysis',
+		meta: {
+			icon: 'fa-line-chart',
+			title: 'Emission Analysis',
+		},
 	},
 
 	{
 		path: '/plan',
 		component: Plan,
-		name: 'Emission Plan',
-		icon: 'fa fa-map-o fa-2x',
-		props: true,
+		name: 'plan',
+		meta: {
+			icon: 'fa-map-o',
+			title: 'Emission Plan',
+		},
 	},
 	{ path: '*', component: NotFound },
 ];
