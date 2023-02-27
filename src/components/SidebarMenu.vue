@@ -1,35 +1,17 @@
 <template>
 	<nav class="sidebar">
 		<ul>
-			<li>
-				<router-link to="/">
-					<i class="fa fa-home fa-2x"></i>
-					<span class="text">Home</span>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="data">
-					<i class="fa fa-list fa-2x"></i>
-					<span class="text">Data</span>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="analysis">
-					<i class="fa fa-line-chart fa-2x"></i>
-					<span class="text">Analysis</span>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="plan">
-					<i class="fa fa-map-o fa-2x"></i>
-					<span class="text">Plan</span>
+			<li v-for="route in routes" :key="route.path">
+				<router-link :to="route.path">
+					<i :class="'fa ' + route.icon + ' fa-2x'"></i>
+					<span class="text">{{ route.name }}</span>
 				</router-link>
 			</li>
 		</ul>
 
 		<ul class="company">
 			<li>
-				<router-link to="company">
+				<router-link to="/company">
 					<img src="@/assets/coffeebell.png" alt="coffeebell icon" />
 				</router-link>
 			</li>
@@ -40,7 +22,16 @@
 <!-- JS  -->
 <script lang="ts">
 export default {
-	props: {},
+	data() {
+		return {
+			routes: [
+				{ name: 'Home', icon: 'fa-home', path: '/' },
+				{ name: 'Data', icon: 'fa-list', path: '/data' },
+				{ name: 'Analysis', icon: 'fa-line-chart', path: '/analysis' },
+				{ name: 'Plan', icon: 'fa-map-o', path: '/plan' },
+			],
+		};
+	},
 };
 </script>
 
