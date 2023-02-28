@@ -36,9 +36,8 @@ export default {
 </script>
 
 <!-- Styling  -->
-<style>
+<style scoped>
 .sidebar {
-	border-top: 1px solid #e5e5e5;
 	position: absolute;
 	top: 60px;
 	bottom: 0;
@@ -50,6 +49,7 @@ export default {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	border-top: 1px solid #e5e5e5;
 }
 .sidebar > ul {
 	margin: 20px 0;

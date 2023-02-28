@@ -35,7 +35,7 @@ export default {
 </script>
 
 <!-- Styling  -->
-<style>
+<style scoped>
 .navbar {
 	width: 100vw;
 	height: 60px;
