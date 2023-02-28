@@ -1,13 +1,3 @@
-<script lang="ts">
-import SidebarMenu from '@/components/SidebarMenu.vue';
-import NavbarMenu from './components/NavbarMenu.vue';
-
-export default {
-	components: { SidebarMenu, NavbarMenu },
-	name: 'App',
-};
-</script>
-
 <template>
 	<div class="app">
 		<navbar-menu />
@@ -19,9 +9,24 @@ export default {
 	</div>
 </template>
 
-<style>
+<!-- JS  -->
+<script>
+import SidebarMenu from '@/components/SidebarMenu.vue';
+import NavbarMenu from './components/NavbarMenu.vue';
+
+export default {
+	components: { SidebarMenu, NavbarMenu },
+	name: 'App',
+};
+</script>
+
+<!-- Styling  -->
+<style scoped>
+.app {
+	width: 100%;
+	height: 100vh;
+}
 .main {
-	margin-left: 90px;
-	margin-top: 10px;
+	padding-left: 65px;
 }
 </style>
