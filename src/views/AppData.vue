@@ -1,39 +1,60 @@
 <template>
 	<main id="data-page">
-		<button id="show-modal" v-on:click="showModal = true">Show Modal</button>
+		<section class="film">
+			<h1>{{ films.director }}</h1>
 
-		<dynamic-modal v-if="showModal" v-on:close="showModal = false">
-			<span slot="header">
-				<h2>Heating main building</h2>
-				<div>
-					<b-nav small>
-						<b-nav-item active>Data</b-nav-item>
-						<b-nav-item>History</b-nav-item>
-						<b-nav-item>Details</b-nav-item>
-						<b-nav-item>Activity</b-nav-item>
-						<b-nav-item>Notes</b-nav-item>
-					</b-nav>
-				</div>
-			</span>
-			<span slot="footer">
-				<b-avatar></b-avatar>
-				<span class="mr-auto">J. Circlehead</span>
-				<span class="mr-auto">just now</span>
-			</span>
-		</dynamic-modal>
+			<div class="film-details">{{ films.director }}</div>
+		</section>
+		<section class="experiences">
+			<h2>Top produsers {{ films.producer }}</h2>
+			<div class="cards">
+				<!-- <router-link
+					v-for="vehicle in films.vehicles"
+					:key="vehicle.episode_id"
+					:to="{
+						name: 'reporting_company',
+						params: { experienceSlug: evehicle.slug },
+					}"
+				>
+				</router-link> -->
+			</div>
+			<router-view />
+		</section>
 	</main>
 </template>
 
 <!-- JS  -->
 <script>
-import DynamicModal from '@/components/DynamicModal.vue';
+const baseURL = 'https://swapi.dev/api';
 
 export default {
-	components: { DynamicModal },
 	data() {
 		return {
-			showModal: false,
+			films: [],
 		};
+	},
+	methods: {
+		async getAllFilms() {
+			try {
+				const res = await fetch(`${baseURL}/films`);
+
+				if (!res.ok) {
+					const message = `An error has occured: ${res.status} - ${res.statusText}`;
+					throw new Error(message);
+				}
+				const data = await res.json();
+				this.films = data.results;
+			} catch (err) {
+				console.error('There was an error!', err);
+			}
+		},
+		episodes() {
+			return this.films.find(films => films.episode_id === this.id);
+		},
+	},
+	mounted() {
+		this.getAllFilms();
+		//this.episodes();
 	},
 };
 </script>

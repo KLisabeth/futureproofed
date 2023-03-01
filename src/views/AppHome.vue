@@ -2,7 +2,28 @@
 <template>
 	<section id="home-page">
 		<h1>Dashboard</h1>
+		<b-container class="mt-4">
+			<b-row>
+				<b-col>
+					<b-form-input v-model="text" ref="get_id" placeholder="Planet Id" />
+				</b-col>
+				<b-col>
+					<b-button variant="outline-primary" @click="getDataById">
+						Get planet Id
+					</b-button>
+				</b-col>
+				<b-col>
+					<b-button variant="outline-warning" @click="clearOutput"
+						>Clear
+					</b-button>
+				</b-col>
+			</b-row>
+			<div v-if="getResult" class="alert alert-secondary mt-2" role="alert">
+				<pre>{{ getResult }}</pre>
+			</div>
+		</b-container>
 		<b-container class="bv-example-row" mt="2" p="2">
+			<b-row class="mt-4"> </b-row>
 			<b-row>
 				<b-col v-for="(planet, index) in planets" :key="index">
 					<b-card text-variant="white" class="text-center">
@@ -10,29 +31,10 @@
 							v-for="(films, rindex) in planet.films"
 							:key="films + rindex"
 						>
-							<a href="" text-variant="white">{{ films }}</a>
+							<a v-bind:href="films" text-variant="white">{{ films }}</a>
 						</b-card-text>
 					</b-card>
 				</b-col>
-			</b-row>
-
-			<b-row class="mt-4">
-				<b-col cols="8"
-					><b-card class="p-3">
-						<b-card-text>
-							Some quick example text to build on the <em>card title</em> and
-							make up the bulk of the card's content.
-						</b-card-text>
-					</b-card></b-col
-				>
-				<b-col cols="4"
-					><b-card class="p-3">
-						<b-card-text>
-							Some quick example text to build on the <em>card title</em> and
-							make up the bulk of the card's content.
-						</b-card-text>
-					</b-card></b-col
-				>
 			</b-row>
 		</b-container>
 	</section>
@@ -46,6 +48,7 @@ export default {
 	data() {
 		return {
 			planets: [],
+			getResult: null,
 		};
 	},
 	methods: {
@@ -75,19 +78,33 @@ export default {
 						throw new Error(message);
 					}
 					const data = await res.json();
-					this.planets = data;
+					const result = {
+						data: data,
+						status: res.status,
+						statusText: res.statusText,
+						headers: {
+							'Content-Type': res.headers.get('Content-Type'),
+							'Content-Length': res.headers.get('Content-Length'),
+						},
+					};
+
+					this.getResult = this.fortmatResponse(result);
 				} catch (err) {
-					console.error('There was an error!', err);
+					this.getResult = err.message;
 				}
 			}
 		},
+		fortmatResponse(res) {
+			return JSON.stringify(res, null, 2);
+		},
 
-		clearGetOutput() {
-			this.planets = null;
+		clearOutput() {
+			this.getResult = null;
 		},
 	},
 	mounted() {
 		this.getAllPlanets();
+		this.getDataById();
 	},
 };
 </script>

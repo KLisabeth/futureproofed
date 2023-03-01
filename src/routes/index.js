@@ -2,15 +2,14 @@
 import NotFound from '@/views/NotFound.vue';
 
 // Admin pages
-const Analysis = () =>
-	import(/* webpackChunkName: "dashboard" */ '@/views/AppAnalysis.vue');
-const Home = () =>
-	import(/* webpackChunkName: "common" */ '@/views/AppHome.vue');
-const Data = () =>
-	import(/* webpackChunkName: "common" */ '@/views/AppData.vue');
-const Plan = () =>
-	import(/* webpackChunkName: "common" */ '@/views/AppPlan.vue');
-
+const Analysis = () => import('@/views/AppAnalysis.vue');
+const Home = () => import('@/views/AppHome.vue');
+const Data = () => import('@/views/AppData.vue');
+const Plan = () => import('@/views/AppPlan.vue');
+const ReportingCompany = () => import('@/views/Company/ReportingCompany.vue');
+const CompanyFacilities = () => import('@/views/Company/CompanyFacilities.vue');
+const FossilFuels = () => import('@/views/Company/FossilFuels.vue');
+//Dummy data
 const routes = [
 	{
 		path: '/',
@@ -29,6 +28,26 @@ const routes = [
 			icon: 'fa-list',
 			title: 'Emission Data',
 		},
+	},
+	{
+		path: '/reporting_company/:id/:slug',
+		name: 'reporting company',
+		component: ReportingCompany,
+		props: route => ({ ...route.params, id: parseInt(route.params.id) }),
+		children: [
+			{
+				path: ':company_facilities',
+				name: 'company facilities',
+				component: CompanyFacilities,
+				props: route => ({ ...route.params, id: parseInt(route.params.id) }),
+			},
+			{
+				path: ':fossil_fuelss',
+				name: 'fossil fuels',
+				component: FossilFuels,
+				props: route => ({ ...route.params, id: parseInt(route.params.id) }),
+			},
+		],
 	},
 	{
 		path: '/analysis',

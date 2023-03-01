@@ -4,25 +4,24 @@
 			<button class="modal-close-button" @click="$emit('close')">
 				<i class="fa fa-close"></i>
 			</button>
-			<div class="modal">
-				<div class="modal-header">
-					<slot name="header"> default header </slot>
-				</div>
 
-				<div class="modal-body">
-					<slot name="body">
-						<form-component />
-					</slot>
-				</div>
+			<div class="modal-header">
+				<slot name="header"> default header </slot>
+			</div>
 
-				<div class="modal-footer">
-					<slot name="footer">
-						default footer
-						<button class="modal-default-button" @click="$emit('close')">
-							OK
-						</button>
-					</slot>
-				</div>
+			<div class="modal-body">
+				<slot name="body">
+					<form-component />
+				</slot>
+			</div>
+
+			<div class="modal-footer">
+				<slot name="footer">
+					default footer
+					<button class="modal-default-button" @click="$emit('close')">
+						OK
+					</button>
+				</slot>
 			</div>
 		</div>
 	</transition>
@@ -47,19 +46,14 @@ export default {
 	position: absolute;
 	width: 500px;
 	height: auto;
-	top: 0;
+	top: 11%;
 	bottom: 0;
 	right: 0;
 	padding: 20px 35px;
 	background-color: #fcfcfc;
 	transition: all 0.2s ease;
 }
-.modal {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
+
 .modal-default-button {
 	float: right;
 }
